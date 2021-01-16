@@ -1,48 +1,45 @@
-
-import React from 'react';
-import axios from 'axios'
-import Card from './Card'
-import './App.css';
+import React from "react";
+import axios from "axios";
+import Card from "./Card";
+import "./App.css";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       userData: {},
-      followers: []
+      followers: [],
     };
   }
 
   componentDidMount() {
-    axios.get("https://api.github.com/users/bxiong916")
-      .then(response => {
+    axios
+      .get("https://api.github.com/users/bxiong916")
+      .then((response) => {
         this.setState({ userData: response.data });
         console.log(this.state.userData);
       })
-      .catch(error => {
-        console.log('error', error)
-
-      })
+      .catch((error) => {
+        console.log("error", error);
+      });
 
     axios
       .get("https://api.github.com/users/bxiong916/followers")
-      .then(response => {
-        console.log('followers', response);
-        this.setState({ followers: response.data })
+      .then((response) => {
+        console.log("followers", response);
+        this.setState({ followers: response.data });
       })
-      .catch(error => {
-        console.log('error', error)
-
-      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   }
 
   render() {
-
     return (
       <div>
         <Card data={this.state.userData} followers={this.state.followers} />
       </div>
-    )
+    );
   }
 }
 
